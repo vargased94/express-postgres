@@ -1,9 +1,10 @@
+import 'dotenv/config';
 import pg from 'pg';
 
 new pg.Pool({
-  user: "postgres.egymrsekonsdsmtnrbpq",
-  host: "aws-0-us-west-1.pooler.supabase.com",
-  password: "4A4shARF955srgMF",
-  database: "postgres",
-  port: 6543,
+  user: process.env.DB_USER,
+  host: process.env.DB_HOST,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+  port: process.env.DB_PORT,
 });
