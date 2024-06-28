@@ -42,7 +42,7 @@ export const updateUser = async (req, res) => {
 
 export const deleteUser = async (req, res) => {
   const { id } = req.params;
-  const { rowCount } = await pool.query('DELETE FROM users WHERE id = $1 RETURNIG *', [id]);
+  const { rowCount } = await pool.query('DELETE FROM users WHERE id = $1 RETURNING *', [id]);
   if (rowCount === 0) {
     return res.status(404).json({ message: 'User not found' });
   }

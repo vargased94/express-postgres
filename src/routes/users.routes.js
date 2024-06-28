@@ -1,4 +1,6 @@
 import { Router } from 'express';
+import { validate } from '../middleware/validationMiddleware.js';
+import { userSchema } from '../schemas/user.js';
 
 import {
   getUsers,
@@ -12,8 +14,8 @@ const router = Router();
 
 router.get("/users", getUsers);
 router.get("/users/:id", getUser);
-router.post("/users", createUser);
-router.put("/users/:id", updateUser);
+router.post("/users", validate(userSchema), createUser);
+router.put("/users/:id", validate(userSchema), updateUser);
 router.delete("/users/:id", deleteUser);
 
 export default router;
