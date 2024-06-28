@@ -1,5 +1,6 @@
 import { Router } from 'express';
-import { validate } from '../middleware/validationMiddleware.js';
+import { validate } from '../middleware/validation.js';
+import { verifyToken } from '../middleware/auth.js';
 import { userSchema } from '../schemas/user.js';
 
 import {
@@ -12,10 +13,10 @@ import {
 
 const router = Router();
 
-router.get("/users", getUsers);
-router.get("/users/:id", getUser);
-router.post("/users", validate(userSchema), createUser);
-router.put("/users/:id", validate(userSchema), updateUser);
-router.delete("/users/:id", deleteUser);
+router.get("/users", verifyToken, getUsers);
+router.get("/users/:id", verifyToken, getUser);
+router.post("/users", [verifyToken, validate(userSchema)], createUser);
+router.put("/users/:id", [verifyToken, validate(userSchema)], updateUser);
+router.delete("/users/:id", verifyToken, deleteUser);
 
 export default router;
