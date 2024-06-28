@@ -5,5 +5,4 @@ CREATE TABLE users (
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-INSERT INTO users (name, email) VALUES ('Alice', 'alice@gmail.com', '2021-01-01 00:00:00'), ('Bob', 'bob@gmail.com', '2021-01-01 00:00:00'), ('Charlie', 'charlie@gmail', '2021-01-01 00:00:00');
-
+INSERT INTO users (name, email) VALUES ('Alice', 'alice@gmail.com'), ('Bob', 'bob@gmail.com'), ('Charlie', 'charlie@gmail');
