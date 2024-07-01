@@ -5,7 +5,7 @@ import bcrypt from 'bcryptjs';
 export const register = async (req, res) => {
   try {
     const { name, email, password } = req.body;
-    const hashedPassword = bcrypt.hashSync(password);
+    const hashedPassword = bcrypt.hashSync(password, 8);
     const { rows } = await pool.query('INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING *', [name, email, hashedPassword]);
     if (rows.length === 0) {
       return res.status(500).json({ message: 'An error occurred' });
@@ -23,8 +23,7 @@ export const login = async (req, res) => {
     return res.status(401).json({ message: 'User not found!' });
   }
   const user = rows[0];
-  const hashedPassword = bcrypt.hashSync(password);
-  const isPasswordMatch = bcrypt.compareSync(hashedPassword, user.password);
+  const isPasswordMatch = bcrypt.compareSync(password, user.password);
   if (!isPasswordMatch) {
     return res.status(401).json({ message: 'Invalid credentials!' });
   }
