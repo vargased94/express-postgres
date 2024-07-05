@@ -1,17 +1,11 @@
 import { pool } from '../db.js';
 
 export const getOrders = async (req, res) => {
-  const { rows } = await pool.query('SELECT id, user_id, customer_id, products FROM orders');
-  res.json(rows);
+  res.json({ message: 'getOrders' });
 };
 
 export const getOrder = async (req, res) => {
-  const { id } = req.params;
-  const { rows } = await pool.query('SELECT id, user_id, customer_id, products FROM orders WHERE id = $1', [id]);
-  if (rows.length === 0) {
-    return res.status(404).json({ message: 'Order not found' });
-  }
-  res.json(rows[0]);
+  res.json({ message: 'getOrder' });
 };
 
 export const createOrder = async (req, res) => {
@@ -33,7 +27,9 @@ export const createOrder = async (req, res) => {
 };
 
 export const updateOrder = async (req, res) => {
+  res.json({ message: 'updateOrder' });
 };
 
 export const deleteOrder = async (req, res) => {
+  res.json({ message: 'deleteOrder' });
 };
