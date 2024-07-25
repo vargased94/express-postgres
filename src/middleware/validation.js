@@ -7,6 +7,10 @@ export const validate = (schema) => (req, res, next) => {
     });
     next();
   } catch (err) {
-    return res.status(400).send(err.errors);
+    if (err.errors.length > 0) {
+      const array = err.errors.map((error) => error.message);
+      return res.status(400).send(array);
+    }
+    return res.status(400).send(err.errors[0].message);
   }
 };
